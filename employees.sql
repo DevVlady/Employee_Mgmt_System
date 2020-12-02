@@ -11,6 +11,11 @@ CREATE TABLE employees (
     manager_id INT NULL
 );
 
+CREATE TABLE department (
+    department_name VARCHAR(30) NOT NULL,
+)
+
 
 
 SELECT * FROM employees;
+SELECT * FROM department_name;
