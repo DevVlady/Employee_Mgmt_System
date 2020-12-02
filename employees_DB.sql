@@ -1,14 +1,14 @@
-DROP DATABASE IF EXISTS myEmployees_db;
+DROP DATABASE IF EXISTS myEmployees_DB;
 
-CREATE DATABASE myEmployees_db;
+CREATE DATABASE myEmployees_DB;
 
-USE myEmployees_db;
+USE myEmployees_DB;
 
 CREATE TABLE employees (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     role_id INT NULL,
-    manager_id INT NULL
+    manager_id INT NULL,
     PRIMARY KEY (first_name)
 );
 
