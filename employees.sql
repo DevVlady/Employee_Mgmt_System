@@ -15,7 +15,12 @@ CREATE TABLE department (
     department_name VARCHAR(30) NOT NULL,
 )
 
-
+CREATE TABLE employee_role (
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL(10, 4) NULL,
+    department_id INT NULL,
+)
 
 SELECT * FROM employees;
 SELECT * FROM department_name;
+SELECT * FROM employee_role;
