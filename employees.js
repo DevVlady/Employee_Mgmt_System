@@ -43,6 +43,45 @@ function runAction() {
     )
     .then(function(answer) {
         console.log(answer);
+        switch(answer.action) {
+            case 'Add Employee':
+            buildEmployee();
+            break;
+
+            case 'Remove Employee':
+            removeEmployee();
+            break;
+
+            case 'Update Employee':
+            updateEmployee();
+            break;
+
+            case 'Update Employees Role':
+            updateEmployeesRole();
+            break;
+
+            case 'Update Employees Manager':
+            updateEmployeesManager();
+            break;
+
+            case 'Add Role':
+            addRole();
+            break;
+
+            case 'Remove Role':
+            removeRole();
+            break;
+
+            case 'View All Roles':
+            viewAllRoles();
+            break;
+
+            case 'View All Employees':
+            viewAllEmployees();
+            break;
+
+            
+        }
     })
 };
 
