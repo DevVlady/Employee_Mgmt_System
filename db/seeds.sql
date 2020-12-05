@@ -1,16 +1,13 @@
 use myEmployees_DB;
 
-INSERT INTO employees
-    (first_name, last_name, role_id, manager_id)
+
+INSERT INTO department
+    (department_name)
 VALUES
-    ('Vladimir', 'Dimitrov', 1, NULL),
-    ('Kon', 'Kravchenko', 2, 1),
-    ('Vladimir', 'Spector', 3, NULL),
-    ('George', 'Awada', 4, 3),
-    ('Dimtar', 'Micevski', 5, NULL),
-    ('Maria', 'Dimitrova', 6, 5),
-    ('Jana', 'Dimitrova', 7, NULL),
-    ('Milena', 'Dimitrova', 8, 7);
+    ('Sales'),
+    ('Engineering'),
+    ('Finance'),
+    ('Legal');
 
 
 INSERT INTO employee_role
@@ -26,10 +23,14 @@ VALUES
     ('Lawyer', 190000, 4);
 
 
-INSERT INTO department
-    (name)
+INSERT INTO employees
+    (first_name, last_name, role_id, manager_id)
 VALUES
-    ('Sales'),
-    ('Engineering'),
-    ('Finance'),
-    ('Legal');
+    ('Vladimir', 'Dimitrov', 1, NULL),
+    ('Kon', 'Kravchenko', 2, 1),
+    ('Vladimir', 'Spector', 3, NULL),
+    ('George', 'Awada', 4, 3),
+    ('Dimtar', 'Micevski', 5, NULL),
+    ('Maria', 'Dimitrova', 6, 5),
+    ('Jana', 'Dimitrova', 7, NULL),
+    ('Milena', 'Dimitrova', 8, 7);

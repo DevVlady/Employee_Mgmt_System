@@ -1,7 +1,7 @@
 {
   "name": "Employee_Mgmt_System",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is an application which allows you to view, edit and add company information about any employee",
   "main": "employees.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Vlady14/Employee_Mgmt_System#readme",
   "dependencies": {
+    "asciiart-logo": "^0.2.6",
     "inquirer": "^7.3.3",
     "mysql": "^2.18.1"
-  }
+  },
+  "devDependencies": {}
 }

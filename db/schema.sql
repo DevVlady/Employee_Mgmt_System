@@ -16,8 +16,9 @@ CREATE TABLE employee_role (
     salary DECIMAL(10, 4) NULL,
     department_id INT NULL,
     PRIMARY KEY (id),
+    CONSTRAINT
     -- MAKE AN CONSTRAINT 'ON DELETEN CASCADE' (WITHOUT QUOTES) ON THIS FOREIGN KEY
-    FOREIGN KEY (department_id) REFERENCES department (id)
+    FOREIGN KEY (department_id) REFERENCES department (id) ON DELETE CASCADE
 );
 
 CREATE TABLE employees (
@@ -28,11 +29,11 @@ CREATE TABLE employees (
     manager_id INT NULL,
     PRIMARY KEY (id),
     -- MAKE role_id AS FOREIGN KEY REFERENCING role TABLE AND MAKE CONSTRAINT ON DELETE CASCADE ON THIS FOREIGN KEY
-    FOREIGN KEY (role_id) REFERENCES employee_role (id)
+    FOREIGN KEY (role_id) REFERENCES employee_role (id) ON DELETE CASCADE,
     -- MAKE manager_id AS FOREIGN KEY REFERENCING employee TABLE ITSELF AND MAKE CONSTRAINT ON DELETE SET NULL ON THIS FOREIGN KEY
-    FOREIGN KEY (manager_id) REFERENCES employees (id)
+    FOREIGN KEY (manager_id) REFERENCES employees (id) ON DELETE CASCADE
 );
 
--- SELECT * FROM employees;
--- SELECT * FROM employee_role;
--- SELECT * FROM department;
+SELECT * FROM department;
+SELECT * FROM employee_role;
+SELECT * FROM employees;
