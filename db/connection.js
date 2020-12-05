@@ -14,7 +14,6 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     console.log('connection as id ' + connection.threadId);
-    runAction();
 });
 
 // Setting up connection.query to use promises instead of callbacks

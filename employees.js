@@ -2,7 +2,7 @@
 const { prompt } = require("inquirer");
 const logo = require("asciiart-logo");
 const db = require("./db");
-require("console.table");
+// require("console.table");
 
 init();
 
@@ -103,7 +103,6 @@ async function runAction() {
             return exit();
     }
 }
-
 
 async function viewAllEmployees() {
     const employees = await db.findAllEmployees();
