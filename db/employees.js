@@ -80,11 +80,10 @@ function runAction() {
             viewAllEmployees();
             break;
 
-            
+
         }
     })
 };
-
 
 
 //Function to Build Employee
@@ -106,7 +105,7 @@ function buildEmployee() {
             message: 'Enter your current role!'
         },
         {
-            name: ''
+            name: 'number'
         }
     )
 }
