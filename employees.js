@@ -153,7 +153,7 @@ async function viewEmployeesByDepartment() {
 
 async function viewEmployeesByManager() {
     const managers = await db.findAllEmployees();
-    console.log('managers', managers)
+    // console.log('managers', managers)
 
     const managerChoices = managers.map(({ id, first_name, last_name }) => ({
         // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
@@ -171,7 +171,7 @@ async function viewEmployeesByManager() {
             choices: managerChoices
         }
     ]);
-    console.log('id', id)
+    // console.log('id', id)
     const employees = await db.findAllEmployeesByManager(id);
 
     console.log("\n");
@@ -226,7 +226,7 @@ async function updateEmployeeRole() {
 
 async function updateEmployeesManager() {
     const employees = await db.findAllEmployees();
-    console.log('employees', employees)
+    // console.log('employees', employees)
 
     const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
         // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
@@ -244,7 +244,7 @@ async function updateEmployeesManager() {
             choices: employeeChoices
         }
     ]);
-    console.log('employeeId', employeeId)
+    // console.log('employeeId', employeeId)
     const manager = await db.findAllPossibleManagers(employeeId);
 
     const managerChoices = manager.map(({ id, first_name, last_name }) => ({
