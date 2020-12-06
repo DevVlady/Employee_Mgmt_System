@@ -152,26 +152,27 @@ async function viewEmployeesByDepartment() {
 }
 
 async function viewEmployeesByManager() {
-    const managers = await db.findAllPossibleManagers();
+    const managers = await db.findAllEmployees();
+    console.log('managers', managers)
 
-    const managerChoices = managers.map(({ id, manager_id }) => ({
+    const managerChoices = managers.map(({ id, first_name, last_name }) => ({
         // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
         // THE PROPERTY value SHOULD CONTAIN id.
         // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
-        name: manager_id,
+        name: `${first_name} ${last_name}`,
         value: id
     }));
-
-    const { managerId } = await prompt([
+    // console.log('manager_id', manager_id)
+    const { id } = await prompt([
         {
             type: "list",
-            name: "managerId",
+            name: "id",
             message: "Which manager would you like to see employees for?",
             choices: managerChoices
         }
     ]);
-
-    const employees = await db.findAllEmployeesByManager(managerId);
+    console.log('id', id)
+    const employees = await db.findAllEmployeesByManager(id);
 
     console.log("\n");
     console.table(employees);
@@ -223,48 +224,49 @@ async function updateEmployeeRole() {
     loadMainPrompts();
 }
 
-// async function updateEmployeesManager() {
-//     const employees = await db.findAllEmployees();
+async function updateEmployeesManager() {
+    const employees = await db.findAllEmployees();
+    console.log('employees', employees)
 
-//     const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
-//         // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
-//         // THE PROPERTY value SHOULD CONTAIN id.
-//         // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
-//         name: first_name + ' ' + last_name,
-//         value: id
-//     }));
+    const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+        // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
+        // THE PROPERTY value SHOULD CONTAIN id.
+        // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
+        name: first_name + ' ' + last_name,
+        value: id
+    }));
 
-//     const { employeeId } = await prompt([
-//         {
-//             type: "list",
-//             name: "employeeId",
-//             message: "Which employee's role do you want to update?",
-//             choices: employeeChoices
-//         }
-//     ]);
+    const { employeeId } = await prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Which employee's manager do you want to update?",
+            choices: employeeChoices
+        }
+    ]);
+    console.log('employeeId', employeeId)
+    const manager = await db.findAllPossibleManagers(employeeId);
 
-//     const roles = await db.findAllRoles();
+    const managerChoices = manager.map(({ id, first_name, last_name }) => ({
+        name: `${first_name} ${last_name}`,
+        value: id
+    }));
 
-//     const roleChoices = roles.map(({ id, title }) => ({
-//         name: title,
-//         value: id
-//     }));
+    const { id } = await prompt([
+        {
+            type: "list",
+            name: "id",
+            message: "Which manager do you want to assign the selected employee?",
+            choices: managerChoices
+        }
+    ]);
 
-//     const { roleId } = await prompt([
-//         {
-//             type: "list",
-//             name: "roleId",
-//             message: "Which role do you want to assign the selected employee?",
-//             choices: roleChoices
-//         }
-//     ]);
+    await db.updateEmployeeManager(employeeId, id);
 
-//     await db.updateEmployeeRole(employeeId, roleId);
+    console.log("Updated employee's manager");
 
-//     console.log("Updated employee's role");
-
-//     loadMainPrompts();
-// }
+    loadMainPrompts();
+}
 
 async function viewRoles() {
     const roles = await db.findAllRoles();
