@@ -99,8 +99,8 @@ async function runAction() {
             return viewEmployeesByDept();
         case 'VIEW_ALL_EMP_BY_MGR':
             return viewEmployeesByManager();
-        default:
-            return exit();
+        // default:
+        //     return exit();
     }
 }
 
