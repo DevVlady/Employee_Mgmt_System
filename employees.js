@@ -50,10 +50,10 @@ async function loadMainPrompts() {
                     value: "UPDATE_EMPLOYEE_ROLE"
                 },
                 // Bonus
-                // {
-                //     name: "Update Employee Manager",
-                //     value: "UPDATE_EMPLOYEE_MANAGER"
-                // },
+                {
+                    name: "Update Employees Manager",
+                    value: "UPDATE_EMPLOYEE_MANAGER"
+                },
                 //  Bonus
                 // {
                 //   name: "Remove Role",
@@ -107,6 +107,8 @@ async function loadMainPrompts() {
             return addRole();
         case "VIEW_EMPLOYEES_BY_MANAGER":
             return viewEmployeesByManager();
+        case "UPDATE_EMPLOYEE_MANAGER":
+            return updateEmployeesManager();
         default:
             return quit();
     }
@@ -220,6 +222,49 @@ async function updateEmployeeRole() {
 
     loadMainPrompts();
 }
+
+// async function updateEmployeesManager() {
+//     const employees = await db.findAllEmployees();
+
+//     const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+//         // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
+//         // THE PROPERTY value SHOULD CONTAIN id.
+//         // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
+//         name: first_name + ' ' + last_name,
+//         value: id
+//     }));
+
+//     const { employeeId } = await prompt([
+//         {
+//             type: "list",
+//             name: "employeeId",
+//             message: "Which employee's role do you want to update?",
+//             choices: employeeChoices
+//         }
+//     ]);
+
+//     const roles = await db.findAllRoles();
+
+//     const roleChoices = roles.map(({ id, title }) => ({
+//         name: title,
+//         value: id
+//     }));
+
+//     const { roleId } = await prompt([
+//         {
+//             type: "list",
+//             name: "roleId",
+//             message: "Which role do you want to assign the selected employee?",
+//             choices: roleChoices
+//         }
+//     ]);
+
+//     await db.updateEmployeeRole(employeeId, roleId);
+
+//     console.log("Updated employee's role");
+
+//     loadMainPrompts();
+// }
 
 async function viewRoles() {
     const roles = await db.findAllRoles();
