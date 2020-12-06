@@ -27,7 +27,7 @@ class DB {
     // Create a new employee
     createEmployee(employee) {
         return this.connection.query(
-            "INSERT INTO employee SET ?",
+            "INSERT INTO employee (first_name, last_name)",
             employee
         );
     }
@@ -61,7 +61,7 @@ class DB {
     // Create a new role
     createRole(role) {
         return this.connection.query(
-            'INSERT INTO role (title)',
+            'INSERT INTO role (title, salary, department_id)',
             role
         );
     }
