@@ -121,11 +121,11 @@ async function viewEmployees() {
 async function viewEmployeesByDepartment() {
     const departments = await db.findAllDepartments();
 
-    const departmentChoices = departments.map(({ id, name }) => ({
+    const departmentChoices = departments.map(({ id, department_name }) => ({
         // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
         // THE PROPERTY value SHOULD CONTAIN id.
         // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
-        name: name,
+        name: department_name,
         value: id
     }));
 
@@ -201,8 +201,8 @@ async function viewRoles() {
 async function addRole() {
     const departments = await db.findAllDepartments();
 
-    const departmentChoices = departments.map(({ id, name }) => ({
-        name: name,
+    const departmentChoices = departments.map(({ id, department_name }) => ({
+        name: department_name,
         value: id
     }));
 
@@ -242,14 +242,14 @@ async function viewDepartments() {
 async function addDepartment() {
     const department = await prompt([
         {
-            name: "name",
+            name: "department_name",
             message: "What is the name of the department?"
         }
     ]);
 
     await db.createDepartment(department);
 
-    console.log(`Added ${department.name} to the database`);
+    console.log(`Added ${department.department_name} to the database`);
 
     loadMainPrompts();
 }
