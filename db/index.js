@@ -11,7 +11,7 @@ class DB {
         return this.connection.query(
             // SELECT id, first_name, last_name FROM employee TABLE AND SELECT department name from department TABLE AND SELECT salary FROM role TABLE
             // YOUR NEED TO USE LEFT JOINS TO JOIN THREE TABLES
-            "SELECT employee.id, employee.first_name, employee.last_name, department.name, role.salary, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role ON employee.id = role.id LEFT JOIN department ON department.id = role.id GROUP BY role.title, department.name"
+            'SELECT employee.id, employee.first_name, employee.last_name, department.name, role.salary, SUM(role.title) FROM employee LEFT JOIN role ON employee.id = role.id LEFT JOIN department ON department.id = role.id GROUP BY id'
         );
     }
 
@@ -47,10 +47,9 @@ class DB {
     // Find all roles, join with departments to display the department name
     findAllRoles() {
         return this.connection.query(
-            // SELECT THE FOLLOWING COLUMNS:
             // id, title, salary FROM role TABLE AND department name FROM department TABLE
             // YOU NEED TO USE LEFT JOIN TO JOIN role and department TABLES
-            // YOUR CODE HERE
+            'SELECT role.id, role.title, role.salary, department.name, SUM(role.salary) FROM role LEFT JOIN department on role.id = department.id GROUP BY id'
         );
     }
 

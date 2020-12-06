@@ -33,6 +33,6 @@ CREATE TABLE employee (
     FOREIGN KEY (manager_id) REFERENCES employee (id) ON DELETE CASCADE
 );
 
-SELECT * FROM department;
-SELECT * FROM role;
-SELECT * FROM employee;
+-- SELECT * FROM department;
+-- SELECT * FROM role;
+-- SELECT * FROM employee;
