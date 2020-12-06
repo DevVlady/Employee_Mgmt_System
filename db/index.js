@@ -7,11 +7,12 @@ class DB {
     }
 
     // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
-    findAllEmployees() {
+    findAllEmployees(employee) {
         return this.connection.query(
             // SELECT id, first_name, last_name FROM employee TABLE AND SELECT department name from department TABLE AND SELECT salary FROM role TABLE
             // YOUR NEED TO USE LEFT JOINS TO JOIN THREE TABLES
-            'SELECT employee.id, employee.first_name, employee.last_name, department.name, role.salary, SUM(role.title) FROM employee LEFT JOIN role ON employee.id = role.id LEFT JOIN department ON department.id = role.id GROUP BY id'
+            'SELECT employee.id, employee.first_name, employee.last_name, department.name, role.salary, SUM(role.title) FROM employee LEFT JOIN role ON employee.id = role.id LEFT JOIN department ON department.id = role.id GROUP BY id',
+            employee
         );
     }
 
@@ -25,14 +26,18 @@ class DB {
 
     // Create a new employee
     createEmployee(employee) {
-        return this.connection.query("INSERT INTO employee SET ?", employee);
+        return this.connection.query(
+            "INSERT INTO employee SET ?",
+            employee
+        );
     }
 
 
     // Update the given employee's role
     updateEmployeeRole(employeeId, roleId) {
         return this.connection.query(
-            // YOUR CODE HERE
+            'UPDATE employee SET role_id = ? WHERE id = ?',
+            [roleId, employeeId]
         );
     }
 
@@ -56,7 +61,8 @@ class DB {
     // Create a new role
     createRole(role) {
         return this.connection.query(
-            // YOUR CODE HERE
+            'INSERT INTO role (title)',
+            role
         );
     }
 
@@ -71,7 +77,8 @@ class DB {
     // Create a new department
     createDepartment(department) {
         return this.connection.query(
-            // YOUR CODE HERE
+            'INSERT INTO department (name)',
+            department
         );
     }
 
