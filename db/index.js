@@ -66,7 +66,6 @@ class DB {
         );
     }
 
-
     // Find all departments, join with employees and roles and sum up utilized department budget
     findAllDepartments() {
         return this.connection.query(

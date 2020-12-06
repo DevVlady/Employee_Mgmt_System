@@ -1,13 +1,13 @@
 const { prompt } = require("inquirer");
 const logo = require("asciiart-logo");
 const db = require("./db");
-// require("console.table");
+require("console.table");
 
 init();
 
 // Display logo text, load main prompts
 function init() {
-    const logoText = logo({ name: "Employee Manager" }).render();
+    const logoText = logo({ name: "Employee Management System" }).render();
 
     console.log(logoText);
 
@@ -22,62 +22,63 @@ async function loadMainPrompts() {
             message: "What would you like to do?",
             choices: [
                 {
-                    name: "View All Employees",
-                    value: "VIEW_EMPLOYEES"
+                    name: "Add Role",
+                    value: "ADD_ROLE"
                 },
-                {
-                    name: "View All Employees By Department",
-                    value: "VIEW_EMPLOYEES_BY_DEPARTMENT"
-                },
-                // Bonus
-                // {
-                //   name: "View All Employees By Manager",
-                //   value: "VIEW_EMPLOYEES_BY_MANAGER"
-                // },
                 {
                     name: "Add Employee",
                     value: "ADD_EMPLOYEE"
                 },
-                // Bonus
-                // {
-                //   name: "Remove Employee",
-                //   value: "REMOVE_EMPLOYEE"
-                // },
+                {
+                    name: "Add Department",
+                    value: "ADD_DEPARTMENT"
+                },
+                {
+                    name: "View All Roles",
+                    value: "VIEW_ROLES"
+                },
+                {
+                    name: "View All Employees",
+                    value: "VIEW_EMPLOYEES"
+                },
+                {
+                    name: "View All Departments",
+                    value: "VIEW_DEPARTMENTS"
+                },
                 {
                     name: "Update Employee Role",
                     value: "UPDATE_EMPLOYEE_ROLE"
                 },
                 // Bonus
                 // {
-                //   name: "Update Employee Manager",
-                //   value: "UPDATE_EMPLOYEE_MANAGER"
+                //     name: "Update Employee Manager",
+                //     value: "UPDATE_EMPLOYEE_MANAGER"
                 // },
-                {
-                    name: "View All Roles",
-                    value: "VIEW_ROLES"
-                },
-                {
-                    name: "Add Role",
-                    value: "ADD_ROLE"
-                },
                 //  Bonus
                 // {
                 //   name: "Remove Role",
                 //   value: "REMOVE_ROLE"
                 // },
-                {
-                    name: "View All Departments",
-                    value: "VIEW_DEPARTMENTS"
-                },
-                {
-                    name: "Add Department",
-                    value: "ADD_DEPARTMENT"
-                },
+
+                // Bonus
+                // {
+                //   name: "Remove Employee",
+                //   value: "REMOVE_EMPLOYEE"
+                // },
                 //  Bonus
                 // {
                 //   name: "Remove Department",
                 //   value: "REMOVE_DEPARTMENT"
                 // },
+                // Bonus
+                {
+                    name: "View All Employees By Manager",
+                    value: "VIEW_EMPLOYEES_BY_MANAGER"
+                },
+                {
+                    name: "View All Employees By Department",
+                    value: "VIEW_EMPLOYEES_BY_DEPARTMENT"
+                },
                 {
                     name: "Quit",
                     value: "QUIT"
@@ -104,6 +105,8 @@ async function loadMainPrompts() {
             return viewRoles();
         case "ADD_ROLE":
             return addRole();
+        case "VIEW_EMPLOYEES_BY_MANAGER":
+            return viewEmployeesByManager();
         default:
             return quit();
     }
@@ -145,6 +148,35 @@ async function viewEmployeesByDepartment() {
 
     loadMainPrompts();
 }
+
+async function viewEmployeesByManager() {
+    const managers = await db.findAllPossibleManagers();
+
+    const managerChoices = managers.map(({ id, manager_id }) => ({
+        // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
+        // THE PROPERTY value SHOULD CONTAIN id.
+        // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
+        name: manager_id,
+        value: id
+    }));
+
+    const { managerId } = await prompt([
+        {
+            type: "list",
+            name: "managerId",
+            message: "Which manager would you like to see employees for?",
+            choices: managerChoices
+        }
+    ]);
+
+    const employees = await db.findAllEmployeesByManager(managerId);
+
+    console.log("\n");
+    console.table(employees);
+
+    loadMainPrompts();
+}
+
 
 async function updateEmployeeRole() {
     const employees = await db.findAllEmployees();
@@ -311,6 +343,6 @@ async function addEmployee() {
 }
 
 function quit() {
-    console.log("Goodbye!");
+    console.log("Thank you for using the Employee Management System. Goodbye!");
     process.exit();
 }
