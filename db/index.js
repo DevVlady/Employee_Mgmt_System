@@ -9,10 +9,9 @@ class DB {
     // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
     findAllEmployees() {
         return this.connection.query(
-            // CREATE SELECT STATMENT WITH THE FOLLOWING COLUMNS FROM THREE TABLES.
             // SELECT id, first_name, last_name FROM employee TABLE AND SELECT department name from department TABLE AND SELECT salary FROM role TABLE
             // YOUR NEED TO USE LEFT JOINS TO JOIN THREE TABLES
-            // YOUR CODE HERE
+            "SELECT employee.id, employee.first_name, employee.last_name, department.name, role.salary, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role ON employee.id = role.id LEFT JOIN department ON department.id = role.id GROUP BY role.title, department.name"
         );
     }
 

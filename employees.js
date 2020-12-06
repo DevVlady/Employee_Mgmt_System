@@ -1,7 +1,7 @@
 const { prompt } = require("inquirer");
 const logo = require("asciiart-logo");
 const db = require("./db");
-require("console.table");
+// require("console.table");
 
 init();
 
@@ -122,7 +122,7 @@ async function viewEmployeesByDepartment() {
     const departments = await db.findAllDepartments();
 
     const departmentChoices = departments.map(({ id, name }) => ({
-        // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
+        // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
         // THE PROPERTY value SHOULD CONTAIN id.
         // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
         // YOUR CODE HERE
