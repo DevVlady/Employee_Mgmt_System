@@ -27,7 +27,7 @@ class DB {
     // Create a new employee
     createEmployee(employee) {
         return this.connection.query(
-            "INSERT INTO employee (first_name, last_name)",
+            "INSERT INTO employee SET ?",
             employee
         );
     }
