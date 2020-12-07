@@ -48,6 +48,14 @@ class DB {
         );
     }
 
+    // Delete department
+    deleteDepartment(department) {
+        return this.connection.query(
+            "DELETE FROM department WHERE id = ?",
+            department
+        );
+    }
+
     // Update the given employee's role
     updateEmployeeRole(employeeId, roleId) {
         return this.connection.query(

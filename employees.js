@@ -65,10 +65,10 @@ async function loadMainPrompts() {
                     value: "REMOVE_EMPLOYEE"
                 },
                 //  Bonus
-                // {
-                //   name: "Remove Department",
-                //   value: "REMOVE_DEPARTMENT"
-                // },
+                {
+                    name: "Remove Department",
+                    value: "REMOVE_DEPARTMENT"
+                },
                 // Bonus
                 {
                     name: "View All Employees By Manager",
@@ -112,6 +112,8 @@ async function loadMainPrompts() {
             return removeEmployee();
         case "REMOVE_ROLE":
             return removeRole();
+        case "REMOVE_DEPARTMENT":
+            return removeDepartment();
         default:
             return quit();
     }
@@ -423,9 +425,6 @@ async function removeRole() {
     const roles = await db.findAllRoles();
 
     const roleChoices = roles.map(({ id, title }) => ({
-        // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
-        // THE PROPERTY value SHOULD CONTAIN id.
-        // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
         name: title,
         value: id
     }));
@@ -446,6 +445,29 @@ async function removeRole() {
     loadMainPrompts();
 }
 
+async function removeDepartment() {
+    const department = await db.findAllDepartments();
+
+    const departmentChoices = department.map(({ id, department_name }) => ({
+        name: department_name,
+        value: id
+    }));
+
+    const { departmentId } = await prompt([
+        {
+            type: "list",
+            name: "departmentId",
+            message: "Which department would you like to remove?",
+            choices: departmentChoices
+        }
+    ]);
+
+    await db.deleteDepartment(departmentId);
+
+    console.log("This department has been removed from the databse");
+
+    loadMainPrompts();
+}
 
 function quit() {
     console.log("Thank you for using the Employee Management System. Goodbye!");
