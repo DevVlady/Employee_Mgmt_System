@@ -410,22 +410,6 @@ async function removeEmployee() {
         }
     ]);
 
-    // const employee = await db.findAllRoles();
-
-    // const id = employee.map(({ id, first_name, last_name }) => ({
-    //     name: first_name + ' ' + last_name,
-    //     value: id
-    // }));
-
-    // const { id } = await prompt([
-    //     {
-    //         type: "list",
-    //         name: "id",
-    //         message: "Which role do you want to assign the selected employee?",
-    //         choices: roleChoices
-    //     }
-    // ]);
-
     await db.deleteEmployee(employeeId);
 
     console.log("This employee has been removed the databse");

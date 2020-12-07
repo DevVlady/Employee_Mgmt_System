@@ -35,7 +35,7 @@ class DB {
     // Create a new employee
     deleteEmployee(employee) {
         return this.connection.query(
-            "DELETE FROM employee SET ?",
+            "DELETE FROM employee WHERE id = ?",
             employee
         );
     }
@@ -91,7 +91,7 @@ class DB {
     // Find all employees in a given department, join with roles to display role titles
     findAllEmployeesByDepartment(departmentId) {
         return this.connection.query(
-            "SELECT employee.id, employee.first_name, employee.last_name, role.title FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department department on role.department_id = department.id WHERE department.id = ?;",
+            "SELECT employee.id, employee.first_name, employee.last_name, role.title FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id WHERE department.id = ?;",
             departmentId
         );
     }
