@@ -32,11 +32,19 @@ class DB {
         );
     }
 
-    // Create a new employee
+    // Delete employee
     deleteEmployee(employee) {
         return this.connection.query(
             "DELETE FROM employee WHERE id = ?",
             employee
+        );
+    }
+
+    // Delete role
+    deleteRole(role) {
+        return this.connection.query(
+            "DELETE FROM role WHERE id = ?",
+            role
         );
     }
 

@@ -110,6 +110,8 @@ async function loadMainPrompts() {
             return updateEmployeesManager();
         case "REMOVE_EMPLOYEE":
             return removeEmployee();
+        case "REMOVE_ROLE":
+            return removeRole();
         default:
             return quit();
     }
@@ -412,10 +414,38 @@ async function removeEmployee() {
 
     await db.deleteEmployee(employeeId);
 
-    console.log("This employee has been removed the databse");
+    console.log("This employee has been removed from the databse");
 
     loadMainPrompts();
 }
+
+async function removeRole() {
+    const roles = await db.findAllRoles();
+
+    const roleChoices = roles.map(({ id, title }) => ({
+        // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
+        // THE PROPERTY value SHOULD CONTAIN id.
+        // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
+        name: title,
+        value: id
+    }));
+
+    const { roleId } = await prompt([
+        {
+            type: "list",
+            name: "roleId",
+            message: "Which role would you like to remove?",
+            choices: roleChoices
+        }
+    ]);
+
+    await db.deleteRole(roleId);
+
+    console.log("This role has been removed from the databse");
+
+    loadMainPrompts();
+}
+
 
 function quit() {
     console.log("Thank you for using the Employee Management System. Goodbye!");
