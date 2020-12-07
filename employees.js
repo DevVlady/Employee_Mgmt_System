@@ -55,10 +55,10 @@ async function loadMainPrompts() {
                     value: "UPDATE_EMPLOYEE_MANAGER"
                 },
                 //  Bonus
-                // {
-                //   name: "Remove Role",
-                //   value: "REMOVE_ROLE"
-                // },
+                {
+                    name: "Remove Role",
+                    value: "REMOVE_ROLE"
+                },
                 // Bonus
                 {
                     name: "Remove Employee",
