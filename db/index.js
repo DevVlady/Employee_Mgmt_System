@@ -32,6 +32,13 @@ class DB {
         );
     }
 
+    // Create a new employee
+    deleteEmployee(employee) {
+        return this.connection.query(
+            "DELETE FROM employee SET ?",
+            employee
+        );
+    }
 
     // Update the given employee's role
     updateEmployeeRole(employeeId, roleId) {

@@ -59,12 +59,11 @@ async function loadMainPrompts() {
                 //   name: "Remove Role",
                 //   value: "REMOVE_ROLE"
                 // },
-
                 // Bonus
-                // {
-                //   name: "Remove Employee",
-                //   value: "REMOVE_EMPLOYEE"
-                // },
+                {
+                    name: "Remove Employee",
+                    value: "REMOVE_EMPLOYEE"
+                },
                 //  Bonus
                 // {
                 //   name: "Remove Department",
@@ -109,6 +108,8 @@ async function loadMainPrompts() {
             return viewEmployeesByManager();
         case "UPDATE_EMPLOYEE_MANAGER":
             return updateEmployeesManager();
+        case "REMOVE_EMPLOYEE":
+            return removeEmployee();
         default:
             return quit();
     }
@@ -385,6 +386,49 @@ async function addEmployee() {
     console.log(
         `Added ${employee.first_name} ${employee.last_name} to the database`
     );
+
+    loadMainPrompts();
+}
+
+async function removeEmployee() {
+    const employees = await db.findAllEmployees();
+
+    const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+        // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
+        // THE PROPERTY value SHOULD CONTAIN id.
+        // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
+        name: first_name + ' ' + last_name,
+        value: id
+    }));
+
+    const { employeeId } = await prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Which employee would you like to remove?",
+            choices: employeeChoices
+        }
+    ]);
+
+    // const employee = await db.findAllRoles();
+
+    // const id = employee.map(({ id, first_name, last_name }) => ({
+    //     name: first_name + ' ' + last_name,
+    //     value: id
+    // }));
+
+    // const { id } = await prompt([
+    //     {
+    //         type: "list",
+    //         name: "id",
+    //         message: "Which role do you want to assign the selected employee?",
+    //         choices: roleChoices
+    //     }
+    // ]);
+
+    await db.deleteEmployee(employeeId);
+
+    console.log("This employee has been removed the databse");
 
     loadMainPrompts();
 }
