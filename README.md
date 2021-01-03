@@ -12,7 +12,7 @@ Employee management system is a platform that allows you to view, update and rem
 
 * [Image](#image)
 
-* [Website](#website)
+* [Demo](#demo)
 
 * [Installation](#installation)
 
@@ -34,9 +34,9 @@ This project is licensed under the APACHE 2.0 license
 
 ![image](https://user-images.githubusercontent.com/71519918/103469068-d9509e00-4d25-11eb-8796-fde42030b076.png)
 
-## Website
+## Demo
 
-Deploy Link: https://drive.google.com/file/d/1tCRU5vvxOO5ASZ8W7ZynTdz9xg4zuuw-/view
+Demo Link: https://drive.google.com/file/d/1tCRU5vvxOO5ASZ8W7ZynTdz9xg4zuuw-/view
 
 ## Installation
 
