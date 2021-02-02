@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vlady14/Employee_Mgmt_System.git"
+    "url": "git+https://github.com/DevVlady/Employee_Mgmt_System.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Vlady14/Employee_Mgmt_System/issues"
+    "url": "https://github.com/DevVlady/Employee_Mgmt_System/issues"
   },
-  "homepage": "https://github.com/Vlady14/Employee_Mgmt_System#readme",
+  "homepage": "https://github.com/DevVlady/Employee_Mgmt_System#readme",
   "dependencies": {
     "asciiart-logo": "^0.2.6",
     "console.table": "^0.10.0",
